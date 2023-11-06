@@ -90,7 +90,7 @@ export const deleteBook = async (req, res, next) => {
       return;
     }
 
-    const removeBook = await Book.findOneAndDelete(req.params.id);
+    const removeBook = await Book.findByIdAndDelete(req.params.id);
 
     if (!removeBook) {
       next(errorHandler(401, "Book not found"));
