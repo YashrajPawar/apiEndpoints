@@ -80,3 +80,25 @@ export const updateBook = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteBook = async (req, res, next) => {
+  try {
+    const isValidId = mongoose.Types.ObjectId.isValid(req.params.id);
+
+    if (!isValidId) {
+      next(errorHandler(401, "Invalid book ID"));
+      return;
+    }
+
+    const removeBook = await Book.findOneAndDelete(req.params.id);
+
+    if (!removeBook) {
+      next(errorHandler(401, "Book not found"));
+      return;
+    }
+
+    res.status(200).json("Book deleted successfully");
+  } catch (error) {
+    next(error);
+  }
+};
