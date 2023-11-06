@@ -19,7 +19,7 @@ export const allBooks = async (req, res, next) => {
     const books = await Book.find({}).exec();
 
     if (books.length === 0) {
-      next(errorHandler("401", "No Books are available"));
+      next(errorHandler(401, "No Books are available"));
       return;
     }
 
@@ -34,18 +34,48 @@ export const getBookById = async (req, res, next) => {
     const isValidId = mongoose.Types.ObjectId.isValid(req.params.id);
 
     if (!isValidId) {
-      next(errorHandler("401", "Invalid book ID"));
+      next(errorHandler(401, "Invalid book ID"));
       return;
     }
 
     const book = await Book.findById({ _id: req.params.id });
 
     if (!book) {
-      next(errorHandler("401", "Book not found"));
+      next(errorHandler(401, "Book not found"));
       return;
     }
 
     res.status(200).json(book);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateBook = async (req, res, next) => {
+  try {
+    const isValidId = mongoose.Types.ObjectId.isValid(req.params.id);
+
+    if (!isValidId) {
+      next(errorHandler(401, "Invalid book ID"));
+      return;
+    }
+    const updatedBook = await Book.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          title: req.body.title,
+          summary: req.body.summary,
+        },
+      },
+      { new: true }
+    );
+
+    if (!updatedBook) {
+      next(errorHandler(401, "Book not found"));
+      return;
+    }
+
+    res.status(200).json(updatedBook);
   } catch (error) {
     next(error);
   }
