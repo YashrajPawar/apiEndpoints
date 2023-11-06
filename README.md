@@ -82,5 +82,33 @@ i assumed not to update the author details since the author is an author himself
 PATCH method I have used because I did not want to modify the whole Book I just wanted to modify some pieces of information about the Book.
 
 
+# Deployment Process
+I have deployed the Node.js application on Railway.app platform
+Steps:
+
+1. Create a New Project:
+After logging in, create a new project on Railway.app. You can give your project a name and choose the Node.js template as your runtime.
+
+
+2. Link a Repository:
+Link your project to a repository on GitHub, GitLab, or Bitbucket. This makes it easy to deploy the code directly from your repository.
+
+
+3. Set Up Environment Variables(if needed):
+If your Node.js application relies on environment variables, you can set them up in Railway.app. In project settings, you'll find a section for environment variables. Add the necessary variables here.
+
+
+4. Configure Build Settings:
+Railway.app will automatically detect the runtime and dependencies for Node.js applications. You can adjust build settings if needed. By default, it uses npm start as the start command for Node.js applications.
+
+
+5. Configure Database:
+If connected to mongodb atlas configure the cloud data by giving the network access to everyone.
+
+
+6. Create the Default Link:
+By Going to setting click on default link Railway.app will generate the link. Click on the Link now we have deployed it successfully and it is ready to use.
+
+
 
 
